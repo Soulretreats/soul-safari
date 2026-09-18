@@ -695,6 +695,24 @@ a.vision-item-text:hover {
   font-family:'Cormorant Garamond',serif; font-weight:400;
   font-size:1.75rem; color:var(--gold); white-space:nowrap;
 }
+/* ══ CURRENCY SWITCH ══ */
+.cur-switch {
+  display:inline-flex; align-items:center; gap:2px;
+  margin-top:28px; padding:4px;
+  border:1px solid rgba(201,169,110,.28);
+}
+.cur-btn {
+  background:none; border:none; cursor:pointer;
+  padding:9px 20px;
+  font-family:'Montserrat',sans-serif; font-size:.6rem; letter-spacing:.2em;
+  text-transform:uppercase; color:rgba(245,240,232,.55);
+  transition:color .3s ease, background .3s ease;
+}
+.cur-btn:hover { color:var(--gold-light); }
+.cur-btn.on { background:var(--gold); color:var(--char); }
+@media (max-width:480px) {
+  .cur-btn { padding:9px 14px; letter-spacing:.14em; }
+}
 .room-toggle {
   align-self:flex-start; margin-top:18px;
   background:none; border:none; cursor:pointer; padding:6px 0;
@@ -719,6 +737,24 @@ a.vision-item-text:hover {
 .room-amenities li::before { content:'·'; position:absolute; left:2px; color:var(--gold); }
 
 /* Premium on-site features */
+/* ── PAYMENT TERMS ── */
+.stay-terms {
+  text-align:center; max-width:620px; margin:46px auto 0;
+  padding:32px 30px; border:1px solid rgba(201,169,110,.22);
+}
+.terms-line {
+  font-family:'Cormorant Garamond',serif; font-weight:400;
+  font-size:1.5rem; line-height:1.4; color:var(--cream);
+}
+.terms-line em { font-style:italic; color:var(--gold); }
+.terms-sub {
+  margin-top:10px; font-size:.78rem; font-weight:300; line-height:1.7;
+  color:rgba(245,240,232,.6);
+}
+@media (max-width:640px) {
+  .stay-terms { padding:26px 22px; }
+  .terms-line { font-size:1.3rem; }
+}
 .stay-features { text-align:center; max-width:720px; margin:48px auto 0; }
 .feat-label {
   display:block;
@@ -1270,6 +1306,11 @@ footer {
       <h2 class="hdg">Your home in <em>the wild</em></h2>
       <div class="g-line" style="margin:0 auto;"></div>
       <p class="stay-sub">Intimate suites set along the riverbank in the heart of the Greater Kruger — each a sanctuary to return to. Choose the space that feels right for you.</p>
+      <div class="cur-switch" role="group" aria-label="Show prices in">
+        <button type="button" class="cur-btn on" data-cur="GBP" aria-pressed="true">GBP</button>
+        <button type="button" class="cur-btn" data-cur="USD" aria-pressed="false">USD</button>
+        <button type="button" class="cur-btn" data-cur="EUR" aria-pressed="false">EUR</button>
+      </div>
     </div>
 
     <div class="stay-rooms">
@@ -1298,14 +1339,14 @@ footer {
                 <span class="room-opt-name">Single · Private King / Queen</span>
                 <span class="room-opt-tag">Solo travelling or value your own space?</span>
               </div>
-              <span class="room-price">£2,400</span>
+              <span class="room-price" data-price-key="gardenSingle">£2,400</span>
             </div>
             <div class="room-opt">
               <div>
                 <span class="room-opt-name">Double / Twin Share · for Two</span>
                 <span class="room-opt-tag">Great for couples or friends travelling together!</span>
               </div>
-              <span class="room-price">£4,000</span>
+              <span class="room-price" data-price-key="gardenDouble">£4,000</span>
             </div>
           </div>
           <button class="room-toggle" type="button">Amenities &amp; details <span class="chev">▾</span></button>
@@ -1352,7 +1393,7 @@ footer {
                 <span class="room-opt-name">Private King / Queen · for Two</span>
                 <span class="room-opt-tag">Perfect for couples or friends who want an unforgettable experience!</span>
               </div>
-              <span class="room-price">£4,900</span>
+              <span class="room-price" data-price-key="riverfront">£4,900</span>
             </div>
           </div>
           <button class="room-toggle" type="button">Amenities &amp; details <span class="chev">▾</span></button>
@@ -1384,18 +1425,25 @@ footer {
       <p class="stay-sub" style="margin-top:0;">Wellness Centre with Himalayan crystal infrared sauna, riverfront gym and spa, saltwater pool, indoor yoga studio, outdoor yoga deck, meditation room, library lounge, creative art studio, an organic permaculture garden and optional star-gazing bath.</p>
     </div>
 
+    <!-- Payment terms -->
+    <div class="stay-terms r">
+      <span class="feat-label">Securing Your Place</span>
+      <p class="terms-line">A <em>30% deposit</em> confirms your booking</p>
+      <p class="terms-sub">Flexible payment plans are available for the remaining amount.</p>
+    </div>
+
     <!-- Booking row -->
     <div class="stay-booking">
       <div class="price-card rl">
         <div class="p-row" style="padding:0 0 12px;"><span class="p-lbl">Retreat Dates</span><span class="p-val" style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--gold);letter-spacing:.03em;">14 – 20 March 2027</span></div>
-        <p class="p-note">Flexible payment plans available</p>
-        <div class="p-divider"></div>
+        <div class="p-divider" style="margin-top:0;"></div>
         <div class="p-row"><span class="p-lbl">Duration</span><span class="p-val">7 Days · 6 Nights</span></div>
         <div class="p-row"><span class="p-lbl">Location</span><span class="p-val">Greater Kruger National Park, South Africa</span></div>
         <div class="p-row"><span class="p-lbl">Group Size</span><span class="p-val">Maximum 10 Guests</span></div>
         <div class="p-row"><span class="p-lbl">Level</span><span class="p-val">All Levels Welcome</span></div>
         <div class="p-row"><span class="p-lbl">Included</span><span class="p-val">All Meals · Yoga · Game Drives · Transfers</span></div>
         <div class="p-row"><span class="p-lbl">Excluded</span><span class="p-val">Flights · Visas · Insurance · Personal Items</span></div>
+        <div class="p-row"><span class="p-lbl">Deposit</span><span class="p-val">30% to confirm · payment plans available</span></div>
       </div>
       <div class="rr">
         <div class="urgency"><span class="pulse"></span>Limited · Only 10 Places Available</div>
@@ -1661,9 +1709,9 @@ const FILM_IMAGES = [
         <label>Room Type</label>
         <select id="mf-room">
           <option value="" disabled selected>Select an option</option>
-          <option value="Luxury Garden Suite - Private King/Queen for One (£2,400)">Luxury Garden Suite - Private King/Queen for One (£2,400)</option>
-          <option value="Luxury Garden Suite - Private King/Queen for Two (£4,000)">Luxury Garden Suite - Private King/Queen for Two (£4,000)</option>
-          <option value="Luxury Riverfront Suite - Private King/Queen for Two (£4,900)">Luxury Riverfront Suite - Private King/Queen for Two (£4,900)</option>
+          <option data-price-key="gardenSingle" data-room-name="Luxury Garden Suite - Private King/Queen for One" value="Luxury Garden Suite - Private King/Queen for One (£2,400)">Luxury Garden Suite - Private King/Queen for One (£2,400)</option>
+          <option data-price-key="gardenDouble" data-room-name="Luxury Garden Suite - Private King/Queen for Two" value="Luxury Garden Suite - Private King/Queen for Two (£4,000)">Luxury Garden Suite - Private King/Queen for Two (£4,000)</option>
+          <option data-price-key="riverfront" data-room-name="Luxury Riverfront Suite - Private King/Queen for Two" value="Luxury Riverfront Suite - Private King/Queen for Two (£4,900)">Luxury Riverfront Suite - Private King/Queen for Two (£4,900)</option>
           <option value="Not sure yet">Not sure yet</option>
         </select>
       </div>
@@ -1686,6 +1734,70 @@ const FILM_IMAGES = [
     </div>
   </div>
 </div>
+
+<!-- ══ CURRENCY SWITCH: GBP / USD / EUR ══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+(function() {
+  // ═══════════════════════════════════════════════════════════════
+  //  THE PRICES  —  this block is the only thing to edit.
+  //  Change a number here and it updates everywhere on the page:
+  //  both room cards AND the Room Type dropdown in the enquiry form.
+  //  Keep the currency symbol and the quote marks exactly as they are.
+  // ═══════════════════════════════════════════════════════════════
+  var PRICES = {
+    gardenSingle: { GBP:'£2,400', USD:'$3,200', EUR:'€2,800' },  // Garden Suite · single
+    gardenDouble: { GBP:'£4,000', USD:'$5,350', EUR:'€4,650' },  // Garden Suite · for two
+    riverfront:   { GBP:'£4,900', USD:'$6,550', EUR:'€5,700' }   // Riverfront Suite · for two
+  };
+
+  // Which currency shows when someone first lands on the page.
+  var DEFAULT_CURRENCY = 'GBP';
+  // ═══════════════════════════════════════════════════════════════
+
+  var buttons = document.querySelectorAll('.cur-btn');
+  if (!buttons.length) return;
+
+  function apply(cur) {
+    if (!cur || !PRICES.gardenSingle[cur]) cur = DEFAULT_CURRENCY;
+
+    // Room card prices
+    document.querySelectorAll('.room-price[data-price-key]').forEach(function(el) {
+      var row = PRICES[el.getAttribute('data-price-key')];
+      if (row && row[cur]) el.textContent = row[cur];
+    });
+
+    // Enquiry form dropdown — label and submitted value both follow
+    document.querySelectorAll('#mf-room option[data-price-key]').forEach(function(opt) {
+      var row  = PRICES[opt.getAttribute('data-price-key')];
+      var name = opt.getAttribute('data-room-name');
+      if (row && row[cur] && name) {
+        var label = name + ' (' + row[cur] + ')';
+        opt.textContent = label;
+        opt.value = label;
+      }
+    });
+
+    // Button states
+    buttons.forEach(function(b) {
+      var on = b.getAttribute('data-cur') === cur;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+
+    try { localStorage.setItem('soulSafariCurrency', cur); } catch (e) {}
+  }
+
+  buttons.forEach(function(b) {
+    b.addEventListener('click', function() { apply(b.getAttribute('data-cur')); });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem('soulSafariCurrency'); } catch (e) {}
+  apply(saved || DEFAULT_CURRENCY);
+})();
+});
+</script>
 
 <!-- ══ ENQUIRY: WhatsApp + email handoff (no third-party service) ══ -->
 <script>
